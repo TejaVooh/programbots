@@ -169,9 +169,45 @@ learning paths inspired by how real engineers build systems.
 <line x1="150" y1="150" x2="120" y2="120" stroke="#6366f1" stroke-width="2"/>
 
 <!-- Scratch Blocks -->
-<rect x="420" y="200" width="50" height="20" rx="5" fill="#f59e0b"/>
-<rect x="420" y="230" width="60" height="20" rx="5" fill="#f59e0b"/>
-<rect x="420" y="260" width="40" height="20" rx="5" fill="#f59e0b"/>
+<!-- More Accurate Scratch Blocks with Notches -->
+<g id="scratch-blocks">
+  <!-- Motion Block (Blue) -->
+  <g transform="translate(420, 200)">
+    <!-- Main block shape -->
+    <path d="M 0 0 L 45 0 L 50 5 L 60 5 L 60 15 L 50 15 L 45 20 L 0 20 Q -5 10 0 0 Z" fill="#4a90e2" stroke="#2e5c8a" stroke-width="1.5"/>
+    <text x="8" y="14" font-size="11" font-weight="500" fill="white">move</text>
+  </g>
+
+  <!-- Looks Block (Purple) -->
+  <g transform="translate(420, 235)">
+    <path d="M 0 0 L 50 0 L 55 5 L 65 5 L 65 15 L 55 15 L 50 20 L 0 20 Q -5 10 0 0 Z" fill="#9966cc" stroke="#6b4c8f" stroke-width="1.5"/>
+    <text x="8" y="14" font-size="11" font-weight="500" fill="white">say</text>
+  </g>
+
+  <!-- Sound Block (Orange) -->
+  <g transform="translate(420, 270)">
+    <path d="M 0 0 L 40 0 L 45 5 L 55 5 L 55 15 L 45 15 L 40 20 L 0 20 Q -5 10 0 0 Z" fill="#f59e0b" stroke="#c97f0f" stroke-width="1.5"/>
+    <text x="5" y="14" font-size="11" font-weight="500" fill="white">play</text>
+  </g>
+
+  <!-- Control Block (Orange-Red) -->
+  <g transform="translate(420, 305)">
+    <path d="M 0 0 L 45 0 L 50 5 L 60 5 L 60 15 L 50 15 L 45 20 L 0 20 Q -5 10 0 0 Z" fill="#ea580c" stroke="#b8460a" stroke-width="1.5"/>
+    <text x="8" y="14" font-size="11" font-weight="500" fill="white">if</text>
+  </g>
+
+  <!-- Variables Block (Red-Orange) -->
+  <g transform="translate(420, 340)">
+    <path d="M 0 0 L 50 0 L 55 5 L 65 5 L 65 15 L 55 15 L 50 20 L 0 20 Q -5 10 0 0 Z" fill="#e74c3c" stroke="#b83c27" stroke-width="1.5"/>
+    <text x="8" y="14" font-size="11" font-weight="500" fill="white">set</text>
+  </g>
+
+  <!-- Advanced Block (Dark Purple) - C-shaped for loops -->
+  <g transform="translate(360, 305)">
+    <path d="M 0 0 L 40 0 L 45 5 L 55 5 L 55 10 L 50 10 L 50 35 L 55 35 L 55 40 L 45 40 L 40 45 L 0 45 Q -8 22.5 0 0 Z" fill="#6b4c8f" stroke="#4a3260" stroke-width="1.5"/>
+    <text x="8" y="14" font-size="10" font-weight="500" fill="white">repeat</text>
+  </g>
+</g>
 
 </svg>
 
