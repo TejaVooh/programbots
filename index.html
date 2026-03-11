@@ -157,16 +157,35 @@ learning paths inspired by how real engineers build systems.
 <rect x="210" y="210" width="30" height="14" rx="6" fill="#e11d48"/>
 <rect x="360" y="210" width="30" height="14" rx="6" fill="#e11d48"/> -->
 
-<!-- AI Nodes -->
-<circle cx="120" cy="120" r="6" fill="#6366f1"/>
-<circle cx="160" cy="100" r="6" fill="#6366f1"/>
-<circle cx="200" cy="130" r="6" fill="#6366f1"/>
-<circle cx="150" cy="150" r="6" fill="#6366f1"/>
+<!-- Circuit Diagram -->
+<g id="circuit" transform="translate(100,100) scale(1.2)">
+  <!-- wires -->
+  <line x1="0" y1="0" x2="80" y2="0" stroke="#4b5563" stroke-width="2"/>
+  <line x1="80" y1="0" x2="80" y2="40" stroke="#4b5563" stroke-width="2"/>
+  <line x1="80" y1="40" x2="0" y2="40" stroke="#4b5563" stroke-width="2"/>
+  <line x1="0" y1="40" x2="0" y2="0" stroke="#4b5563" stroke-width="2"/>
+  <!-- resistor zigzag -->
+  <path d="M0 20 h20 l5 -10 l5 20 l5 -20 l5 20 l5 -10 h20" fill="none" stroke="#4b5563" stroke-width="2"/>
+  <!-- capacitor -->
+  <line x1="50" y1="5" x2="50" y2="35" stroke="#4b5563" stroke-width="4"/>
+  <line x1="55" y1="5" x2="55" y2="35" stroke="#4b5563" stroke-width="4"/>
+  <!-- LED triangle -->
+  <polygon points="20,10 30,20 20,30" fill="#f59e0b" stroke="#e65100" stroke-width="1"/>
+  <line x1="30" y1="20" x2="40" y2="20" stroke="#4b5563" stroke-width="2"/>
+</g>
 
-<line x1="120" y1="120" x2="160" y2="100" stroke="#6366f1" stroke-width="2"/>
-<line x1="160" y1="100" x2="200" y2="130" stroke="#6366f1" stroke-width="2"/>
-<line x1="200" y1="130" x2="150" y2="150" stroke="#6366f1" stroke-width="2"/>
-<line x1="150" y1="150" x2="120" y2="120" stroke="#6366f1" stroke-width="2"/>
+<!-- Drone in sky -->
+<g id="drone" transform="translate(480,60) scale(0.7)">
+  <rect x="-15" y="-5" width="30" height="10" fill="#374151" rx="2"/>
+  <circle cx="-20" cy="-10" r="6" fill="#9ca3af"/>
+  <circle cx="20" cy="-10" r="6" fill="#9ca3af"/>
+  <circle cx="-20" cy="10" r="6" fill="#9ca3af"/>
+  <circle cx="20" cy="10" r="6" fill="#9ca3af"/>
+  <line x1="-20" y1="-10" x2="-30" y2="-20" stroke="#374151" stroke-width="2"/>
+  <line x1="-20" y1="-10" x2="-30" y2="0" stroke="#374151" stroke-width="2"/>
+  <line x1="20" y1="-10" x2="30" y2="-20" stroke="#374151" stroke-width="2"/>
+  <line x1="20" y1="-10" x2="30" y2="0" stroke="#374151" stroke-width="2"/>
+</g>
 
 <!-- Scratch Blocks -->
 <!-- More Accurate Scratch Blocks with Notches -->
