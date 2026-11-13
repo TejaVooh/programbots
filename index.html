@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ProgramBots | Coding, Electronics and Robotics Classes for Ages 8 to 16</title>
-<meta name="description" content="Most children forget what they built in robotics class within weeks. ProgramBots is being rebuilt so that what your child learns stays learned. New classes opening soon.">
+<meta name="description" content="Coding, electronics and robotics classes for ages 8 to 16, rebuilt so the learning lasts. New classes opening soon.">
 <meta name="theme-color" content="#070B0F">
 
 <meta property="og:title" content="ProgramBots">
-<meta property="og:description" content="Your child built a robot. Can they build it again next month? Our new classes make sure the answer is yes.">
+<meta property="og:description" content="Your child built a robot. Can they build it again next month? New classes opening soon.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.programbots.com/">
 <meta property="og:image" content="https://www.programbots.com/logo.png">
@@ -32,8 +32,7 @@
   --line:rgba(141,162,176,.16);
   --grid-min:rgba(17,176,200,.055);
   --grid-maj:rgba(17,176,200,.11);
-  --max:1080px;
-  --col:720px;
+  --max:1000px;
 }
 
 *{box-sizing:border-box;}
@@ -45,7 +44,7 @@ body{
   color:var(--muted);
   font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   font-size:16.5px;
-  line-height:1.65;
+  line-height:1.6;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
@@ -63,8 +62,8 @@ body{
     linear-gradient(90deg, var(--grid-maj) 1px, transparent 1px);
   background-size:28px 28px, 28px 28px, 140px 140px, 140px 140px;
   background-position:center center;
-  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 28%, #000 0%, rgba(0,0,0,.45) 55%, transparent 88%);
-  mask-image:radial-gradient(ellipse 90% 70% at 50% 28%, #000 0%, rgba(0,0,0,.45) 55%, transparent 88%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 75% at 50% 32%, #000 0%, rgba(0,0,0,.45) 55%, transparent 90%);
+  mask-image:radial-gradient(ellipse 90% 75% at 50% 32%, #000 0%, rgba(0,0,0,.45) 55%, transparent 90%);
 }
 
 /* ---- Background: circuit board traces ---- */
@@ -119,9 +118,7 @@ body{
   background:linear-gradient(90deg,var(--red) 0%,var(--red) 34%,var(--copper) 34%,var(--copper) 52%,var(--teal) 52%,var(--teal) 100%);
 }
 
-/* ---- Shell ---- */
 .shell{position:relative;z-index:2;}
-.col{max-width:var(--col);margin:0 auto;}
 .wide{max-width:var(--max);margin:0 auto;}
 
 /* ---- Small labels ---- */
@@ -135,13 +132,13 @@ body{
 }
 .rule{
   display:flex;align-items:center;gap:14px;
-  margin:0 0 26px;
+  margin:0 0 24px;
 }
 .rule::after{content:"";flex:1;height:1px;background:var(--line);}
 
 /* ---- Hero ---- */
 .hero{
-  padding:74px 24px 88px;
+  padding:74px 24px 70px;
   text-align:center;
 }
 .logo{
@@ -185,112 +182,335 @@ h1{
 h1 .lit{color:var(--teal-lit);}
 
 .lede{
-  margin:0 auto;
-  max-width:58ch;
+  margin:0 auto 34px;
+  max-width:50ch;
   font-size:clamp(16.5px,2.1vw,19px);
-  line-height:1.62;
+  line-height:1.6;
 }
 .lede strong{color:var(--paper);font-weight:700;}
 
+/* ---- Form ---- */
+form{display:flex;gap:10px;max-width:470px;margin:0 auto;}
+input[type=email]{
+  flex:1;min-width:0;
+  padding:14px 16px;
+  font:inherit;font-size:15px;
+  color:var(--paper);
+  background:rgba(7,11,15,.7);
+  border:1px solid var(--line);
+  border-radius:10px;
+  outline:none;
+  transition:border-color .18s ease, box-shadow .18s ease;
+}
+input[type=email]::placeholder{color:var(--dim);}
+input[type=email]:focus{
+  border-color:var(--teal);
+  box-shadow:0 0 0 3px rgba(17,176,200,.18);
+}
+button,.btn{
+  display:inline-block;
+  padding:14px 26px;
+  font:inherit;font-size:15px;font-weight:700;
+  color:#fff;background:var(--red);
+  border:0;border-radius:10px;cursor:pointer;white-space:nowrap;
+  text-decoration:none;
+  transition:background .18s ease, transform .12s ease;
+}
+button:hover,.btn:hover{background:#FF2630;}
+button:active,.btn:active{transform:translateY(1px);}
+button:focus-visible,.btn:focus-visible,input:focus-visible{outline:2px solid var(--teal-lit);outline-offset:2px;}
+.fineprint{
+  margin:14px 0 0;
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:11px;letter-spacing:.05em;color:var(--dim);
+}
+
+/* ---- Facts strip ---- */
+.facts{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:rgba(7,11,15,.55);
+  padding:0 24px;
+}
+.facts-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+}
+.fact{
+  padding:26px 16px;
+  text-align:center;
+  border-left:1px solid var(--line);
+}
+.fact:first-child{border-left:0;}
+.fact b{
+  display:block;
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:clamp(22px,3.4vw,30px);
+  font-weight:700;
+  letter-spacing:-.03em;
+  line-height:1.1;
+  color:var(--paper);
+  margin-bottom:6px;
+}
+.fact:nth-child(1) b{color:var(--teal-lit);}
+.fact:nth-child(2) b{color:var(--copper);}
+.fact:nth-child(3) b{color:var(--red-lit);}
+.fact span{font-size:13.5px;color:var(--muted);}
+
 /* ---- Sections ---- */
-section{padding:66px 24px;border-top:1px solid var(--line);}
+section{padding:62px 24px;}
+section + section{border-top:1px solid var(--line);}
 h2{
-  margin:0 0 16px;
+  margin:0 0 28px;
   font-size:clamp(23px,3.4vw,32px);
   line-height:1.2;
   letter-spacing:-.025em;
   font-weight:800;
   color:var(--paper);
 }
-p{margin:0 0 16px;}
-p:last-child{margin-bottom:0;}
-.big{font-size:18px;line-height:1.6;color:var(--paper);}
 
-/* ---- Student and parent cards ---- */
-.who{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  margin-top:30px;
-}
-.who-card{
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:rgba(238,244,247,.022);
-  padding:22px 20px;
-}
-.who-card h3{
-  margin:0 0 8px;
-  font-size:16px;font-weight:700;
-  color:var(--paper);
-}
-.who-card:nth-child(1) h3{color:var(--teal-lit);}
-.who-card:nth-child(2) h3{color:var(--copper);}
-.who-card p{font-size:15px;line-height:1.55;margin:0;}
-
-/* ---- Number tiles ---- */
-.stats{
+/* ---- Cards ---- */
+.cards{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:14px;
-  margin:34px 0 28px;
 }
-.stat{
+.card{
   border:1px solid var(--line);
   border-radius:12px;
   background:rgba(238,244,247,.022);
-  padding:22px 20px;
+  padding:24px 20px;
+  transition:border-color .2s ease, transform .2s ease;
 }
-.stat .fig{
-  display:block;
-  font-family:"JetBrains Mono",ui-monospace,monospace;
-  font-size:clamp(26px,4vw,34px);
-  font-weight:700;
-  letter-spacing:-.03em;
-  line-height:1.05;
-  color:var(--teal-lit);
-  margin-bottom:10px;
-}
-.stat:nth-child(2) .fig{color:var(--copper);}
-.stat:nth-child(3) .fig{color:var(--red-lit);}
-.stat .what{display:block;font-size:14.5px;line-height:1.55;color:var(--muted);margin-bottom:10px;}
-.stat .src{
-  display:block;
-  font-family:"JetBrains Mono",ui-monospace,monospace;
-  font-size:10.5px;letter-spacing:.05em;color:var(--dim);
-}
-
-/* ---- How a class works ---- */
-.method{border-top:1px solid var(--line);margin-top:30px;}
-.row{
-  display:grid;
-  grid-template-columns:44px 1fr 1.6fr;
-  gap:22px;
-  padding:22px 0;
-  border-bottom:1px solid var(--line);
-  align-items:start;
-}
-.row .num{
-  font-family:"JetBrains Mono",ui-monospace,monospace;
-  font-size:13px;font-weight:700;letter-spacing:.06em;
-  color:var(--teal);
-  padding-top:2px;
-}
-.row h3{
-  margin:0;
+.card:hover{transform:translateY(-3px);}
+.card:nth-child(1):hover{border-color:var(--teal);}
+.card:nth-child(2):hover{border-color:var(--copper);}
+.card:nth-child(3):hover{border-color:var(--red);}
+.card svg{display:block;margin-bottom:14px;}
+.card h3{
+  margin:0 0 6px;
   font-size:17px;font-weight:700;letter-spacing:-.012em;
   color:var(--paper);
 }
-.row .impl{font-size:15.5px;line-height:1.55;margin:0;}
+.card p{margin:0;font-size:15px;line-height:1.55;}
 
-/* ---- Levels ---- */
-.levels{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  margin-top:30px;
+.tease{
+  margin:26px 0 0;
+  font-size:15.5px;
+  color:var(--paper);
 }
-.level{
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:rgba(238,244,247,.022);
+
+/* ---- Closing band ---- */
+.closing{text-align:center;}
+.closing h2{margin-bottom:10px;}
+.closing p{margin:0 auto 24px;max-width:44ch;}
+
+/* ---- Footer ---- */
+footer{
+  position:relative;z-index:2;
+  border-top:1px solid var(--line);
+  padding:24px;
+  background:rgba(7,11,15,.75);
+}
+.footrow{
+  max-width:var(--max);margin:0 auto;
+  display:flex;flex-wrap:wrap;gap:8px 24px;
+  justify-content:space-between;align-items:center;
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.05em;
+  color:var(--dim);
+}
+.footrow a{color:var(--muted);text-decoration:none;}
+.footrow a:hover{color:var(--teal-lit);}
+
+/* ---- Responsive ---- */
+@media (max-width:720px){
+  .hero{padding:52px 20px 54px;}
+  section{padding:46px 20px;}
+  .cards{grid-template-columns:1fr;gap:10px;}
+  .facts-grid{grid-template-columns:1fr 1fr;}
+  .fact{padding:20px 12px;}
+  .fact:nth-child(3){border-left:0;}
+  .fact:nth-child(n+3){border-top:1px solid var(--line);}
+  form{flex-direction:column;}
+  .footrow{justify-content:center;text-align:center;}
+  .reg{display:none;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;}
+  .signal{display:none;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Graph-paper background -->
+<div class="substrate" aria-hidden="true"></div>
+
+<!-- Circuit board traces -->
+<svg class="traces" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+
+  <polyline class="trace" points="-40,150 180,150 230,200 520,200 560,160 700,160"/>
+  <polyline class="trace thin" points="-40,214 150,214 196,260 520,260"/>
+  <polyline class="trace" points="1480,120 1240,120 1196,164 940,164 900,204 760,204"/>
+  <polyline class="trace warm" points="1480,250 1300,250 1256,294 1020,294"/>
+  <polyline class="trace thin" points="-40,470 120,470 170,520 340,520 390,470 600,470"/>
+  <polyline class="trace" points="1480,520 1280,520 1230,570 980,570 940,610 820,610"/>
+  <polyline class="trace thin" points="200,900 200,760 250,710 250,560"/>
+  <polyline class="trace warm" points="1180,900 1180,790 1130,740 1130,650"/>
+  <polyline class="trace thin" points="640,900 640,820 690,770 940,770"/>
+
+  <polyline class="signal" points="-40,150 180,150 230,200 520,200 560,160 700,160"/>
+  <polyline class="signal s2" points="1480,120 1240,120 1196,164 940,164 900,204 760,204"/>
+  <polyline class="signal s3" points="1480,520 1280,520 1230,570 980,570 940,610 820,610"/>
+
+  <g>
+    <circle class="pad" cx="700" cy="160" r="7"/><circle class="pad-core" cx="700" cy="160" r="2.6"/>
+    <circle class="pad" cx="520" cy="260" r="7"/><circle class="pad-core" cx="520" cy="260" r="2.6"/>
+    <circle class="pad" cx="760" cy="204" r="7"/><circle class="pad-core" cx="760" cy="204" r="2.6"/>
+    <circle class="pad" cx="1020" cy="294" r="7"/><circle class="pad-core" cx="1020" cy="294" r="2.6"/>
+    <circle class="pad" cx="600" cy="470" r="7"/><circle class="pad-core" cx="600" cy="470" r="2.6"/>
+    <circle class="pad" cx="820" cy="610" r="7"/><circle class="pad-core" cx="820" cy="610" r="2.6"/>
+    <circle class="pad" cx="250" cy="560" r="7"/><circle class="pad-core" cx="250" cy="560" r="2.6"/>
+    <circle class="pad" cx="1130" cy="650" r="7"/><circle class="pad-core" cx="1130" cy="650" r="2.6"/>
+    <circle class="pad" cx="940" cy="770" r="7"/><circle class="pad-core" cx="940" cy="770" r="2.6"/>
+  </g>
+
+  <g class="trace thin">
+    <rect x="286" y="330" width="86" height="58" rx="3"/>
+    <rect x="1042" y="398" width="104" height="48" rx="3"/>
+  </g>
+
+</svg>
+
+<span class="reg tl" aria-hidden="true"></span>
+<span class="reg tr" aria-hidden="true"></span>
+<span class="reg bl" aria-hidden="true"></span>
+<span class="reg br" aria-hidden="true"></span>
+
+<div class="brandbar"></div>
+
+<div class="shell">
+
+  <!-- ============ HERO ============ -->
+  <header class="hero" id="notify">
+    <img class="logo" src="logo.png" alt="ProgramBots" width="400" height="60">
+
+    <div class="status"><span class="dot"></span>New classes opening soon</div>
+
+    <h1>Your child built a robot. <span class="lit">Can they build it again next month?</span></h1>
+
+    <p class="lede">
+      Most classes end with a finished project. <strong>Ours end with a child who can do it again, alone.</strong> ProgramBots is coming back, rebuilt from the ground up.
+    </p>
+
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <input type="email" name="email" placeholder="your@email.com" aria-label="Email address" required>
+      <button type="submit">Tell me first</button>
+    </form>
+    <p class="fineprint">One email when enrolment opens. We never share your address.</p>
+  </header>
+
+  <!-- ============ FACTS ============ -->
+  <div class="facts">
+    <div class="wide facts-grid">
+      <div class="fact"><b>8 to 16</b><span>Age group</span></div>
+      <div class="fact"><b>3</b><span>Subjects</span></div>
+      <div class="fact"><b>4</b><span>Levels</span></div>
+      <div class="fact"><b>1</b><span>Goal: skills that stay</span></div>
+    </div>
+  </div>
+
+  <!-- ============ WHAT IS DIFFERENT ============ -->
+  <section>
+    <div class="wide">
+      <div class="rule"><span class="tag">What is different</span></div>
+      <h2>Built so the learning lasts.</h2>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Skills that stay</h3>
+          <p>Your child will still know it months later. Not only on the day of the class.</p>
+        </div>
+        <div class="card">
+          <h3>Progress you can see</h3>
+          <p>Clear levels. At each one, your child shows what they can build on their own.</p>
+        </div>
+        <div class="card">
+          <h3>Real things, built by hand</h3>
+          <p>Real code, real circuits and real robots that move. Nothing pretend.</p>
+        </div>
+      </div>
+
+      <p class="tease">How we do it is the part we worked on the longest. You will see it when we open.</p>
+    </div>
+  </section>
+
+  <!-- ============ SUBJECTS ============ -->
+  <section>
+    <div class="wide">
+      <div class="rule"><span class="tag">What your child will learn</span></div>
+      <h2>Three subjects. One connected journey.</h2>
+
+      <div class="cards">
+
+        <div class="card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3FD8EF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 9 5.5 12 9 15"></polyline>
+            <polyline points="15 9 18.5 12 15 15"></polyline>
+            <line x1="13" y1="6.5" x2="11" y2="17.5"></line>
+          </svg>
+          <h3>Coding</h3>
+          <p>From first programs to Python that controls real hardware.</p>
+        </div>
+
+        <div class="card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8A33D" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="7.5" y="7.5" width="9" height="9" rx="1.5"></rect>
+            <line x1="12" y1="3.5" x2="12" y2="7.5"></line>
+            <line x1="12" y1="16.5" x2="12" y2="20.5"></line>
+            <line x1="3.5" y1="12" x2="7.5" y2="12"></line>
+            <line x1="16.5" y1="12" x2="20.5" y2="12"></line>
+          </svg>
+          <h3>Electronics</h3>
+          <p>Circuits, lights and sensors, wired by the child's own hands.</p>
+        </div>
+
+        <div class="card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FF4A52" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4.5" y="9" width="15" height="10.5" rx="2.5"></rect>
+            <line x1="12" y1="5" x2="12" y2="9"></line>
+            <circle cx="12" cy="4" r="1.4"></circle>
+            <circle cx="9.2" cy="14" r="1.3" fill="#FF4A52" stroke="none"></circle>
+            <circle cx="14.8" cy="14" r="1.3" fill="#FF4A52" stroke="none"></circle>
+          </svg>
+          <h3>Robotics</h3>
+          <p>Robots that sense, decide and move without any help.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING ============ -->
+  <section class="closing">
+    <div class="wide">
+      <h2>Seats will be limited.</h2>
+      <p>People on the list hear first, before enrolment opens to everyone.</p>
+      <a class="btn" href="#notify">Join the list</a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="footrow">
+    <span>&copy; 2026 ProgramBots Labs &middot; Pune, India</span>
+    <span><a href="mailto:hello@programbots.com">hello@programbots.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
