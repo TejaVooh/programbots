@@ -2,228 +2,680 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProgramBots | Retention-First Computing, Electronics and Robotics</title>
+<meta name="description" content="Most robotics classes end with a working robot and nothing retained. ProgramBots is being rebuilt on mastery learning, spaced retrieval and constructionism. Opening 2026.">
+<meta name="theme-color" content="#070B0F">
 
-<title>ProgramBots — Reimagining Learning</title>
+<meta property="og:title" content="ProgramBots">
+<meta property="og:description" content="The robot works. Three weeks later the child cannot rebuild it. We are fixing that.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.programbots.com/">
+<meta property="og:image" content="https://www.programbots.com/logo.png">
+
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
+:root{
+  --red:#ED1B24;
+  --red-lit:#FF4A52;
+  --teal:#11B0C8;
+  --teal-lit:#3FD8EF;
+  --copper:#E8A33D;
+  --ink:#070B0F;
+  --ink-2:#0C1218;
+  --paper:#EEF4F7;
+  --muted:#8DA2B0;
+  --dim:#5E7280;
+  --line:rgba(141,162,176,.16);
+  --grid-min:rgba(17,176,200,.055);
+  --grid-maj:rgba(17,176,200,.11);
+  --max:1080px;
+  --col:720px;
+}
+
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
 
 body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-background:#f8fafc;
-color:#1e293b;
+  margin:0;
+  background-color:var(--ink);
+  color:var(--muted);
+  font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
 
-.container{
-max-width:1100px;
-margin:auto;
-padding:40px 20px;
+/* ---- Substrate: two-level graph paper ---- */
+.substrate{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(var(--grid-min) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-min) 1px, transparent 1px),
+    linear-gradient(var(--grid-maj) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-maj) 1px, transparent 1px);
+  background-size:28px 28px, 28px 28px, 140px 140px, 140px 140px;
+  background-position:center center;
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 28%, #000 0%, rgba(0,0,0,.45) 55%, transparent 88%);
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 28%, #000 0%, rgba(0,0,0,.45) 55%, transparent 88%);
 }
 
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:40px;
+/* ---- Substrate: PCB trace layer ---- */
+.traces{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  opacity:.75;
+}
+.trace{
+  fill:none;
+  stroke:rgba(17,176,200,.28);
+  stroke-width:1.4;
+  stroke-linecap:square;
+  stroke-linejoin:miter;
+}
+.trace.thin{stroke:rgba(17,176,200,.16);stroke-width:1;}
+.trace.warm{stroke:rgba(232,163,61,.20);}
+.pad{fill:none;stroke:rgba(17,176,200,.34);stroke-width:1.4;}
+.pad-core{fill:var(--ink);}
+
+.signal{
+  fill:none;
+  stroke:var(--teal-lit);
+  stroke-width:1.9;
+  stroke-linecap:round;
+  stroke-dasharray:30 1600;
+  filter:drop-shadow(0 0 5px rgba(63,216,239,.85));
+  animation:flow 9s linear infinite;
+}
+.signal.s2{stroke:var(--red-lit);filter:drop-shadow(0 0 5px rgba(255,74,82,.8));animation-duration:13s;animation-delay:2.4s;}
+.signal.s3{stroke:var(--copper);filter:drop-shadow(0 0 5px rgba(232,163,61,.8));animation-duration:11s;animation-delay:5.1s;}
+@keyframes flow{from{stroke-dashoffset:1630;}to{stroke-dashoffset:0;}}
+
+/* ---- Fab registration marks ---- */
+.reg{position:fixed;z-index:1;width:22px;height:22px;pointer-events:none;opacity:.5;}
+.reg::before,.reg::after{content:"";position:absolute;background:rgba(17,176,200,.5);}
+.reg::before{left:50%;top:0;width:1px;height:100%;transform:translateX(-50%);}
+.reg::after{top:50%;left:0;height:1px;width:100%;transform:translateY(-50%);}
+.reg.tl{top:22px;left:22px;}
+.reg.tr{top:22px;right:22px;}
+.reg.bl{bottom:22px;left:22px;}
+.reg.br{bottom:22px;right:22px;}
+
+/* ---- Brand rule ---- */
+.brandbar{
+  position:relative;z-index:3;
+  height:3px;
+  background:linear-gradient(90deg,var(--red) 0%,var(--red) 34%,var(--copper) 34%,var(--copper) 52%,var(--teal) 52%,var(--teal) 100%);
 }
 
-.logo{
-font-size:26px;
-font-weight:700;
-}
+/* ---- Shell ---- */
+.shell{position:relative;z-index:2;}
+.band{padding:0 24px;}
+.col{max-width:var(--col);margin:0 auto;}
+.wide{max-width:var(--max);margin:0 auto;}
 
-.logo .program{
-color:#ef4444;
+/* ---- Mono micro-labels ---- */
+.tag{
+  font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+  color:var(--teal);
 }
-
-.logo .bots{
-color:#0ea5e9;
+.rule{
+  display:flex;align-items:center;gap:14px;
+  margin:0 0 26px;
 }
+.rule::after{content:"";flex:1;height:1px;background:var(--line);}
 
+/* ---- Hero ---- */
 .hero{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:40px;
-align-items:center;
+  padding:74px 24px 88px;
+  text-align:center;
+}
+.logo{
+  width:100%;
+  max-width:300px;
+  height:auto;
+  display:block;
+  margin:0 auto 32px;
+}
+.status{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:6px 15px 6px 11px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(17,176,200,.05);
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--paper);
+  margin-bottom:30px;
+}
+.dot{
+  width:7px;height:7px;border-radius:50%;background:var(--red);
+  box-shadow:0 0 0 0 rgba(237,27,36,.55);
+  animation:pulse 2.6s ease-out infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(237,27,36,.55);}
+  70%{box-shadow:0 0 0 10px rgba(237,27,36,0);}
+  100%{box-shadow:0 0 0 0 rgba(237,27,36,0);}
 }
 
 h1{
-font-size:42px;
-margin-bottom:10px;
+  margin:0 auto 22px;
+  max-width:16ch;
+  font-size:clamp(36px,6.4vw,66px);
+  line-height:1.06;
+  letter-spacing:-.035em;
+  font-weight:800;
+  color:var(--paper);
+}
+h1 .strike{
+  color:var(--dim);
+  text-decoration:line-through;
+  text-decoration-color:var(--red);
+  text-decoration-thickness:3px;
+}
+h1 .lit{color:var(--teal-lit);}
+
+.lede{
+  margin:0 auto;
+  max-width:60ch;
+  font-size:clamp(16.5px,2.1vw,19px);
+  line-height:1.62;
+}
+.lede strong{color:var(--paper);font-weight:700;}
+
+/* ---- Section ---- */
+section{padding:66px 24px;border-top:1px solid var(--line);}
+h2{
+  margin:0 0 16px;
+  font-size:clamp(23px,3.4vw,32px);
+  line-height:1.2;
+  letter-spacing:-.025em;
+  font-weight:800;
+  color:var(--paper);
+}
+p{margin:0 0 16px;}
+p:last-child{margin-bottom:0;}
+.big{font-size:17.5px;line-height:1.6;color:var(--paper);}
+
+/* ---- Stat tiles ---- */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin:34px 0 28px;
+}
+.stat{
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:rgba(238,244,247,.022);
+  padding:22px 20px;
+}
+.stat .fig{
+  display:block;
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:clamp(26px,4vw,34px);
+  font-weight:700;
+  letter-spacing:-.03em;
+  line-height:1.05;
+  color:var(--teal-lit);
+  margin-bottom:9px;
+}
+.stat:nth-child(2) .fig{color:var(--copper);}
+.stat:nth-child(3) .fig{color:var(--red-lit);}
+.stat .what{display:block;font-size:13.5px;line-height:1.5;color:var(--muted);margin-bottom:9px;}
+.stat .src{
+  display:block;
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:10.5px;letter-spacing:.06em;color:var(--dim);
 }
 
-p{
-font-size:18px;
-line-height:1.6;
+/* ---- Method rows ---- */
+.method{border-top:1px solid var(--line);margin-top:30px;}
+.row{
+  display:grid;
+  grid-template-columns:52px 1fr 1.15fr;
+  gap:22px;
+  padding:22px 0;
+  border-bottom:1px solid var(--line);
+  align-items:start;
+}
+.row .num{
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:12px;font-weight:700;letter-spacing:.08em;
+  color:var(--dim);
+  padding-top:3px;
+}
+.row h3{
+  margin:0 0 4px;
+  font-size:16px;font-weight:700;letter-spacing:-.012em;
+  color:var(--paper);
+}
+.row .cite{
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:11px;letter-spacing:.04em;color:var(--teal);
+}
+.row .impl{font-size:14.5px;line-height:1.55;margin:0;}
+
+/* ---- Curriculum table ---- */
+.spine{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:28px;
+  font-size:14.5px;
+}
+.spine th{
+  text-align:left;
+  padding:0 16px 11px 0;
+  border-bottom:1px solid var(--line);
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:10.5px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--dim);
+  white-space:nowrap;
+}
+.spine td{
+  padding:16px 16px 16px 0;
+  border-bottom:1px solid var(--line);
+  vertical-align:top;
+}
+.spine tr:last-child td{border-bottom:0;}
+.spine .lvl{
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-weight:700;color:var(--teal-lit);white-space:nowrap;
+}
+.spine .name{color:var(--paper);font-weight:700;}
+.spine .age{
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  color:var(--muted);white-space:nowrap;
 }
 
-.badge{
-display:inline-block;
-background:#e0f2fe;
-color:#0284c7;
-padding:6px 12px;
-border-radius:6px;
-font-size:14px;
-margin-bottom:12px;
+/* ---- Evidence quality ---- */
+.grades{list-style:none;padding:0;margin:26px 0 0;}
+.grades li{
+  display:grid;
+  grid-template-columns:104px 1fr;
+  gap:18px;
+  padding:14px 0;
+  border-top:1px solid var(--line);
+  font-size:14.5px;
+  line-height:1.55;
+}
+.grade{
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  padding:4px 0 0;
+}
+.g-strong{color:var(--teal-lit);}
+.g-mod{color:var(--copper);}
+.g-weak{color:var(--red-lit);}
+.g-none{color:var(--dim);}
+
+/* ---- Signup ---- */
+.signup{
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:
+    linear-gradient(180deg, rgba(17,176,200,.055) 0%, rgba(238,244,247,.015) 100%);
+  padding:40px 32px;
+  text-align:center;
+  margin-top:8px;
+}
+.signup h2{margin-bottom:10px;}
+.signup p.sub{max-width:48ch;margin:0 auto 24px;font-size:15.5px;}
+form{display:flex;gap:10px;max-width:470px;margin:0 auto;}
+input[type=email]{
+  flex:1;min-width:0;
+  padding:14px 16px;
+  font:inherit;font-size:15px;
+  color:var(--paper);
+  background:rgba(7,11,15,.6);
+  border:1px solid var(--line);
+  border-radius:10px;
+  outline:none;
+  transition:border-color .18s ease, box-shadow .18s ease;
+}
+input[type=email]::placeholder{color:var(--dim);}
+input[type=email]:focus{
+  border-color:var(--teal);
+  box-shadow:0 0 0 3px rgba(17,176,200,.18);
+}
+button{
+  padding:14px 26px;
+  font:inherit;font-size:15px;font-weight:700;
+  color:#fff;background:var(--red);
+  border:0;border-radius:10px;cursor:pointer;white-space:nowrap;
+  transition:background .18s ease, transform .12s ease;
+}
+button:hover{background:#FF2630;}
+button:active{transform:translateY(1px);}
+button:focus-visible,input:focus-visible{outline:2px solid var(--teal-lit);outline-offset:2px;}
+.fineprint{
+  margin:14px 0 0;
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:11px;letter-spacing:.05em;color:var(--dim);
 }
 
+/* ---- Footer ---- */
 footer{
-text-align:center;
-margin-top:80px;
-font-size:14px;
-color:#64748b;
+  position:relative;z-index:2;
+  border-top:1px solid var(--line);
+  padding:24px;
+  background:rgba(7,11,15,.75);
+}
+.footrow{
+  max-width:var(--col);margin:0 auto;
+  display:flex;flex-wrap:wrap;gap:8px 24px;
+  justify-content:space-between;align-items:center;
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.05em;
+  color:var(--dim);
+}
+.footrow a{color:var(--muted);text-decoration:none;}
+.footrow a:hover{color:var(--teal-lit);}
+
+/* ---- Responsive ---- */
+@media (max-width:860px){
+  .row{grid-template-columns:38px 1fr;gap:16px;}
+  .row .impl{grid-column:2;padding-top:6px;}
+}
+@media (max-width:640px){
+  .hero{padding:52px 20px 62px;}
+  section{padding:48px 20px;}
+  .stats{grid-template-columns:1fr;gap:10px;}
+  .spine{font-size:13.5px;}
+  .spine th:nth-child(4),.spine td:nth-child(4){display:none;}
+  .grades li{grid-template-columns:1fr;gap:4px;}
+  .signup{padding:30px 20px;}
+  form{flex-direction:column;}
+  .footrow{justify-content:center;text-align:center;}
+  .reg{display:none;}
 }
 
-@media (max-width:900px){
-.hero{
-grid-template-columns:1fr;
-text-align:center;
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;}
+  .signal{display:none;}
 }
-svg{
-max-width:420px;
-margin:auto;
-}
-}
-
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
+<!-- Graph-paper substrate -->
+<div class="substrate" aria-hidden="true"></div>
 
-<header>
-<div class="logo">
-<span class="program">Program</span><span class="bots">Bots</span>
-</div>
-</header>
+<!-- PCB trace layer -->
+<svg class="traces" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
 
-<section class="hero">
+  <polyline class="trace" points="-40,150 180,150 230,200 520,200 560,160 700,160"/>
+  <polyline class="trace thin" points="-40,214 150,214 196,260 520,260"/>
+  <polyline class="trace" points="1480,120 1240,120 1196,164 940,164 900,204 760,204"/>
+  <polyline class="trace warm" points="1480,250 1300,250 1256,294 1020,294"/>
+  <polyline class="trace thin" points="-40,470 120,470 170,520 340,520 390,470 600,470"/>
+  <polyline class="trace" points="1480,520 1280,520 1230,570 980,570 940,610 820,610"/>
+  <polyline class="trace thin" points="200,900 200,760 250,710 250,560"/>
+  <polyline class="trace warm" points="1180,900 1180,790 1130,740 1130,650"/>
+  <polyline class="trace thin" points="640,900 640,820 690,770 940,770"/>
 
-<div>
+  <polyline class="signal" points="-40,150 180,150 230,200 520,200 560,160 700,160"/>
+  <polyline class="signal s2" points="1480,120 1240,120 1196,164 940,164 900,204 760,204"/>
+  <polyline class="signal s3" points="1480,520 1280,520 1230,570 980,570 940,610 820,610"/>
 
-<div class="badge">Reimagining</div>
-
-<h1>
-AI, Robotics & Creative Computing
-</h1>
-
-<p>
-ProgramBots is being reimagined as a modern learning platform focused on
-hands-on education in AI, robotics, electronics, and programming.
-</p>
-
-<p>
-The new system will feature guided labs, visual workflows, and step-by-step
-learning paths inspired by how real engineers build systems.
-</p>
-
-<p>
-<strong>Coming Soon.</strong>
-</p>
-
-</div>
-
-<div>
-
-<svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg">
-
-<rect width="600" height="420" fill="#e0f2fe"/>
-
-<!-- Sun -->
-<circle cx="500" cy="80" r="40" fill="#fde047"/>
-
-<!-- Hills -->
-<path d="M0 300 Q150 220 300 300 T600 300 V420 H0 Z" fill="#22c55e"/>
-<path d="M0 340 Q200 260 400 340 T600 340 V420 H0 Z" fill="#16a34a"/>
-
-<!-- Robot Body
-<rect x="240" y="190" width="120" height="120" rx="14" fill="#e11d48"/> -->
-
-<!-- Robot Head -->
-<rect x="255" y="140" width="90" height="70" rx="12" fill="#e11d48"/>
-
-<!-- Robot Eyes -->
-<circle cx="280" cy="170" r="8" fill="white"/>
-<circle cx="320" cy="170" r="8" fill="white"/>
-
-<!-- Antenna -->
-<line x1="300" y1="140" x2="300" y2="110" stroke="#e11d48" stroke-width="4"/>
-<circle cx="300" cy="105" r="6" fill="#e11d48"/>
-
-<!-- Arms 
-<rect x="210" y="210" width="30" height="14" rx="6" fill="#e11d48"/>
-<rect x="360" y="210" width="30" height="14" rx="6" fill="#e11d48"/> -->
-
-<!-- AI Nodes -->
-<circle cx="120" cy="120" r="6" fill="#6366f1"/>
-<circle cx="160" cy="100" r="6" fill="#6366f1"/>
-<circle cx="200" cy="130" r="6" fill="#6366f1"/>
-<circle cx="150" cy="150" r="6" fill="#6366f1"/>
-
-<line x1="120" y1="120" x2="160" y2="100" stroke="#6366f1" stroke-width="2"/>
-<line x1="160" y1="100" x2="200" y2="130" stroke="#6366f1" stroke-width="2"/>
-<line x1="200" y1="130" x2="150" y2="150" stroke="#6366f1" stroke-width="2"/>
-<line x1="150" y1="150" x2="120" y2="120" stroke="#6366f1" stroke-width="2"/>
-
-<!-- Scratch Blocks -->
-<!-- More Accurate Scratch Blocks with Notches -->
-<g id="scratch-blocks">
-  <!-- Motion Block (Blue) -->
-  <g transform="translate(420, 200)">
-    <!-- Main block shape -->
-    <path d="M 0 0 L 45 0 L 50 5 L 60 5 L 60 15 L 50 15 L 45 20 L 0 20 Q -5 10 0 0 Z" fill="#4a90e2" stroke="#2e5c8a" stroke-width="1.5"/>
-    <text x="8" y="14" font-size="11" font-weight="500" fill="white">move</text>
+  <g>
+    <circle class="pad" cx="700" cy="160" r="7"/><circle class="pad-core" cx="700" cy="160" r="2.6"/>
+    <circle class="pad" cx="520" cy="260" r="7"/><circle class="pad-core" cx="520" cy="260" r="2.6"/>
+    <circle class="pad" cx="760" cy="204" r="7"/><circle class="pad-core" cx="760" cy="204" r="2.6"/>
+    <circle class="pad" cx="1020" cy="294" r="7"/><circle class="pad-core" cx="1020" cy="294" r="2.6"/>
+    <circle class="pad" cx="600" cy="470" r="7"/><circle class="pad-core" cx="600" cy="470" r="2.6"/>
+    <circle class="pad" cx="820" cy="610" r="7"/><circle class="pad-core" cx="820" cy="610" r="2.6"/>
+    <circle class="pad" cx="250" cy="560" r="7"/><circle class="pad-core" cx="250" cy="560" r="2.6"/>
+    <circle class="pad" cx="1130" cy="650" r="7"/><circle class="pad-core" cx="1130" cy="650" r="2.6"/>
+    <circle class="pad" cx="940" cy="770" r="7"/><circle class="pad-core" cx="940" cy="770" r="2.6"/>
   </g>
 
-  <!-- Looks Block (Purple) -->
-  <g transform="translate(420, 235)">
-    <path d="M 0 0 L 50 0 L 55 5 L 65 5 L 65 15 L 55 15 L 50 20 L 0 20 Q -5 10 0 0 Z" fill="#9966cc" stroke="#6b4c8f" stroke-width="1.5"/>
-    <text x="8" y="14" font-size="11" font-weight="500" fill="white">say</text>
+  <g class="trace thin">
+    <rect x="286" y="330" width="86" height="58" rx="3"/>
+    <rect x="1042" y="398" width="104" height="48" rx="3"/>
   </g>
-
-  <!-- Sound Block (Orange) -->
-  <g transform="translate(420, 270)">
-    <path d="M 0 0 L 40 0 L 45 5 L 55 5 L 55 15 L 45 15 L 40 20 L 0 20 Q -5 10 0 0 Z" fill="#f59e0b" stroke="#c97f0f" stroke-width="1.5"/>
-    <text x="5" y="14" font-size="11" font-weight="500" fill="white">play</text>
-  </g>
-
-  <!-- Control Block (Orange-Red) -->
-  <g transform="translate(420, 305)">
-    <path d="M 0 0 L 45 0 L 50 5 L 60 5 L 60 15 L 50 15 L 45 20 L 0 20 Q -5 10 0 0 Z" fill="#ea580c" stroke="#b8460a" stroke-width="1.5"/>
-    <text x="8" y="14" font-size="11" font-weight="500" fill="white">if</text>
-  </g>
-
-  <!-- Variables Block (Red-Orange) -->
-  <g transform="translate(420, 340)">
-    <path d="M 0 0 L 50 0 L 55 5 L 65 5 L 65 15 L 55 15 L 50 20 L 0 20 Q -5 10 0 0 Z" fill="#e74c3c" stroke="#b83c27" stroke-width="1.5"/>
-    <text x="8" y="14" font-size="11" font-weight="500" fill="white">set</text>
-  </g>
-
-  <!-- Advanced Block (Dark Purple) - C-shaped for loops -->
-  <g transform="translate(360, 305)">
-    <path d="M 0 0 L 40 0 L 45 5 L 55 5 L 55 10 L 50 10 L 50 35 L 55 35 L 55 40 L 45 40 L 40 45 L 0 45 Q -8 22.5 0 0 Z" fill="#6b4c8f" stroke="#4a3260" stroke-width="1.5"/>
-    <text x="8" y="14" font-size="10" font-weight="500" fill="white">repeat</text>
-  </g>
-</g>
 
 </svg>
 
-</div>
+<span class="reg tl" aria-hidden="true"></span>
+<span class="reg tr" aria-hidden="true"></span>
+<span class="reg bl" aria-hidden="true"></span>
+<span class="reg br" aria-hidden="true"></span>
 
-</section>
+<div class="brandbar"></div>
+
+<div class="shell">
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <img class="logo" src="logo.png" alt="ProgramBots" width="400" height="60">
+
+    <div class="status"><span class="dot"></span>Rebuild in progress &middot; Opening 2026</div>
+
+    <h1>The robot works. <span class="strike">Three weeks later</span> <span class="lit">nothing is left.</span></h1>
+
+    <p class="lede">
+      That is the normal outcome of build-based robotics classes, including the one we ran here until 2016. The child finishes a working project, the parent is pleased, and almost none of it survives the term. <strong>We are rebuilding ProgramBots around retention instead of activity.</strong>
+    </p>
+  </header>
+
+  <!-- ============ WHY ============ -->
+  <section class="band">
+    <div class="col">
+      <div class="rule"><span class="tag">01 / Why rebuild</span></div>
+      <h2>A finished build is evidence of a good afternoon, not of learning.</h2>
+      <p class="big">Version one of ProgramBots taught builds. Kits, guided steps, a thing that moved at the end. It produced completion. It did not produce recall.</p>
+      <p>Nothing in that format asks a child to retrieve anything from memory under difficulty, and retrieval under difficulty is what makes knowledge stay. So the curriculum is being rewritten from zero against four decades of retention research, and the schedule is being built on the assumption that children forget, because they do.</p>
+      <p>The rebuild is a pedagogy change, not a coat of paint.</p>
+    </div>
+  </section>
+
+  <!-- ============ EVIDENCE ============ -->
+  <section class="band">
+    <div class="wide">
+      <div class="rule"><span class="tag">02 / The evidence we are building on</span></div>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="fig">61% / 40%</span>
+          <span class="what">Recall of the same passage one week on. Self-testers against rereaders. The self-testers read it 3.4 times, the rereaders 14.2 times.</span>
+          <span class="src">Roediger &amp; Karpicke, 2006</span>
+        </div>
+        <div class="stat">
+          <span class="fig">1&sigma;</span>
+          <span class="what">Gain from mastery learning in a group setting. The average mastery student outperforms roughly 84% of conventionally taught students. No private tutor required.</span>
+          <span class="src">Bloom, 1984</span>
+        </div>
+        <div class="stat">
+          <span class="fig">2&sigma;</span>
+          <span class="what">Gain from one-to-one tutoring plus mastery learning, the 98th percentile result. Unaffordable at scale, and the figure is contested. See section 05.</span>
+          <span class="src">Bloom, 1984</span>
+        </div>
+      </div>
+
+      <p style="max-width:68ch;">The 1 sigma number is the one that matters commercially. It is deliverable in a small group, at a price a parent will pay, by instructors who can be trained. That is the target ProgramBots is designed around.</p>
+    </div>
+  </section>
+
+  <!-- ============ METHOD ============ -->
+  <section class="band">
+    <div class="wide">
+      <div class="rule"><span class="tag">03 / The method</span></div>
+      <h2>Five principles, and what each one changes in the room.</h2>
+
+      <div class="method">
+
+        <div class="row">
+          <div class="num">P.01</div>
+          <div>
+            <h3>Retrieval practice</h3>
+            <span class="cite">Roediger &amp; Karpicke, 2006</span>
+          </div>
+          <p class="impl">Every session opens cold. The child rebuilds last week's circuit or rewrites last week's function from memory before any new material is touched. No notes, no reference sheet.</p>
+        </div>
+
+        <div class="row">
+          <div class="num">P.02</div>
+          <div>
+            <h3>Spaced repetition</h3>
+            <span class="cite">Ebbinghaus, 1885 &middot; Cepeda et al., 2006</span>
+          </div>
+          <p class="impl">Concepts return on a widening schedule: week 1, week 3, week 8, week 20. A loop learned in term one reappears inside a motor controller in term three.</p>
+        </div>
+
+        <div class="row">
+          <div class="num">P.03</div>
+          <div>
+            <h3>Mastery gating</h3>
+            <span class="cite">Bloom, 1984</span>
+          </div>
+          <p class="impl">No child advances on attendance. A level closes only when the child can rebuild its core artefact unaided, from a blank breadboard and an empty file.</p>
+        </div>
+
+        <div class="row">
+          <div class="num">P.04</div>
+          <div>
+            <h3>Desirable difficulty</h3>
+            <span class="cite">Bjork &amp; Bjork, 1992</span>
+          </div>
+          <p class="impl">Kits arrive incomplete and instructions arrive partial, on purpose. The struggle is the mechanism, not a flaw in the lesson plan. Comfort in week one predicts nothing in week ten.</p>
+        </div>
+
+        <div class="row">
+          <div class="num">P.05</div>
+          <div>
+            <h3>Constructionism</h3>
+            <span class="cite">Papert, Mindstorms, 1980</span>
+          </div>
+          <p class="impl">Every unit ends in a public, shareable object the child can explain to someone else. Explaining it is the assessment. If they cannot teach it, they did not learn it.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CURRICULUM ============ -->
+  <section class="band">
+    <div class="wide">
+      <div class="rule"><span class="tag">04 / Curriculum spine</span></div>
+      <h2>Four levels. Each one gated on a rebuild from memory.</h2>
+
+      <table class="spine">
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Spine</th>
+            <th>Gate: rebuild unaided</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="lvl">L1</td>
+            <td class="name">Signals</td>
+            <td class="age">8 to 10</td>
+            <td>Sequence, loops, conditionals. Current, voltage, LEDs, switches.</td>
+            <td>A timed traffic light on breadboard, coded and wired from blank.</td>
+          </tr>
+          <tr>
+            <td class="lvl">L2</td>
+            <td class="name">Systems</td>
+            <td class="age">10 to 12</td>
+            <td>Python functions and state. Sensors, analogue input, serial.</td>
+            <td>A sensor that reads the room and acts on a threshold the child sets.</td>
+          </tr>
+          <tr>
+            <td class="lvl">L3</td>
+            <td class="name">Control</td>
+            <td class="age">12 to 14</td>
+            <td>Feedback loops, proportional control, motor drivers, power budgets.</td>
+            <td>A line follower that recovers from being pushed off course.</td>
+          </tr>
+          <tr>
+            <td class="lvl">L4</td>
+            <td class="name">Autonomy</td>
+            <td class="age">14 to 16</td>
+            <td>Perception, decision logic, embedded constraints, version control.</td>
+            <td>A robot that completes a course it has not seen before.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ EVIDENCE QUALITY ============ -->
+  <section class="band">
+    <div class="col">
+      <div class="rule"><span class="tag">05 / Evidence quality</span></div>
+      <h2>Which of these claims is actually solid.</h2>
+      <p>Education marketing cites research badly. Here is our own honest grading of what the page above rests on.</p>
+
+      <ul class="grades">
+        <li>
+          <span class="grade g-strong">Strong</span>
+          <span>Retrieval practice and spacing. Replicated across hundreds of studies, many age groups and many subjects. We would stake the whole curriculum on these two, and we have.</span>
+        </li>
+        <li>
+          <span class="grade g-mod">Moderate</span>
+          <span>Mastery learning in groups. The direction of the evidence is consistent, the size of the effect varies by subject and by how strictly the gate is enforced.</span>
+        </li>
+        <li>
+          <span class="grade g-weak">Contested</span>
+          <span>Bloom's exact 2 sigma figure. Small samples, tightly controlled conditions, and it has not been reliably reproduced at that magnitude. We quote it for context, not as a promise.</span>
+        </li>
+        <li>
+          <span class="grade g-none">Not a number</span>
+          <span>Papert's constructionism. A design philosophy, not a measured effect. It shapes how our units are built and we will not pretend it comes with an effect size.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ SIGNUP ============ -->
+  <section class="band">
+    <div class="col">
+      <div class="signup">
+        <div class="rule" style="justify-content:center;"><span class="tag">06 / Get the first look</span></div>
+        <h2>The full curriculum outline, before enrolment opens.</h2>
+        <p class="sub">Level maps, the retention schedule, the kit list and the fee structure. Sent once, to the people on this list first.</p>
+
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input type="email" name="email" placeholder="your@email.com" aria-label="Email address" required>
+          <button type="submit">Send it to me</button>
+        </form>
+
+        <p class="fineprint">One email. No list sharing. No newsletter.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
 
 <footer>
-
-<p>
-ProgramBots · AI Robotics Learning Lab · programbots.com
-</p>
-
+  <div class="footrow">
+    <span>&copy; 2026 ProgramBots Labs &middot; Pune, India</span>
+    <span><a href="mailto:hello@programbots.com">hello@programbots.com</a></span>
+  </div>
 </footer>
-
-</div>
 
 </body>
 </html>
