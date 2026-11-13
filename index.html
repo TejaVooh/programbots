@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ProgramBots | Coding, Electronics and Robotics for Ages 8 to 16</title>
 <meta name="description" content="Don't just use technology. Build it. Coding, electronics and robotics classes for ages 8 to 16. Opening soon.">
-<meta name="theme-color" content="#070B0F">
+<meta name="theme-color" content="#F7F4EE">
 
 <meta property="og:title" content="ProgramBots">
 <meta property="og:description" content="Don't just use it. Build it. Classes for ages 8 to 16, opening soon.">
@@ -20,18 +20,20 @@
 
 <style>
 :root{
-  --red:#ED1B24;
-  --red-lit:#FF4A52;
-  --teal:#11B0C8;
-  --teal-lit:#3FD8EF;
-  --copper:#E8A33D;
-  --ink:#070B0F;
-  --paper:#EEF4F7;
-  --muted:#9DB0BC;
-  --dim:#647886;
-  --line:rgba(141,162,176,.16);
-  --grid-min:rgba(17,176,200,.055);
-  --grid-maj:rgba(17,176,200,.11);
+  --bg:#F7F4EE;            /* warm off-white page */
+  --surface:#FFFFFF;       /* cards, inputs */
+  --text:#14181C;          /* headlines */
+  --muted:#56616B;         /* body copy */
+  --dim:#8A949C;           /* fine print */
+  --red:#ED1B24;           /* brand red, buttons */
+  --red-deep:#D1151D;      /* red as text and hover */
+  --teal:#11B0C8;          /* brand teal, lines */
+  --teal-deep:#0B8799;     /* teal as text */
+  --copper:#E8A33D;        /* brand yellow, lines */
+  --copper-deep:#B27410;   /* yellow as text */
+  --line:rgba(20,24,28,.11);
+  --grid-min:rgba(11,135,153,.085);
+  --grid-maj:rgba(11,135,153,.17);
   --max:1000px;
 }
 
@@ -40,7 +42,7 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
 
 body{
   margin:0;
-  background-color:var(--ink);
+  background-color:var(--bg);
   color:var(--muted);
   font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   font-size:16.5px;
@@ -74,36 +76,36 @@ body{
   width:100%;
   height:100%;
   pointer-events:none;
-  opacity:.75;
+  opacity:.8;
 }
 .trace{
   fill:none;
-  stroke:rgba(17,176,200,.28);
+  stroke:rgba(11,135,153,.34);
   stroke-width:1.4;
   stroke-linecap:square;
   stroke-linejoin:miter;
 }
-.trace.thin{stroke:rgba(17,176,200,.16);stroke-width:1;}
-.trace.warm{stroke:rgba(232,163,61,.20);}
-.pad{fill:none;stroke:rgba(17,176,200,.34);stroke-width:1.4;}
-.pad-core{fill:var(--ink);}
+.trace.thin{stroke:rgba(11,135,153,.20);stroke-width:1;}
+.trace.warm{stroke:rgba(178,116,16,.30);}
+.pad{fill:none;stroke:rgba(11,135,153,.42);stroke-width:1.4;}
+.pad-core{fill:var(--bg);}
 
 .signal{
   fill:none;
-  stroke:var(--teal-lit);
-  stroke-width:1.9;
+  stroke:var(--teal);
+  stroke-width:2.2;
   stroke-linecap:round;
   stroke-dasharray:30 1600;
-  filter:drop-shadow(0 0 5px rgba(63,216,239,.85));
+  filter:drop-shadow(0 0 4px rgba(17,176,200,.55));
   animation:flow 9s linear infinite;
 }
-.signal.s2{stroke:var(--red-lit);filter:drop-shadow(0 0 5px rgba(255,74,82,.8));animation-duration:13s;animation-delay:2.4s;}
-.signal.s3{stroke:var(--copper);filter:drop-shadow(0 0 5px rgba(232,163,61,.8));animation-duration:11s;animation-delay:5.1s;}
+.signal.s2{stroke:var(--red);filter:drop-shadow(0 0 4px rgba(237,27,36,.45));animation-duration:13s;animation-delay:2.4s;}
+.signal.s3{stroke:var(--copper);filter:drop-shadow(0 0 4px rgba(232,163,61,.6));animation-duration:11s;animation-delay:5.1s;}
 @keyframes flow{from{stroke-dashoffset:1630;}to{stroke-dashoffset:0;}}
 
 /* ---- Corner crosshair marks ---- */
-.reg{position:fixed;z-index:1;width:22px;height:22px;pointer-events:none;opacity:.5;}
-.reg::before,.reg::after{content:"";position:absolute;background:rgba(17,176,200,.5);}
+.reg{position:fixed;z-index:1;width:22px;height:22px;pointer-events:none;opacity:.55;}
+.reg::before,.reg::after{content:"";position:absolute;background:rgba(11,135,153,.6);}
 .reg::before{left:50%;top:0;width:1px;height:100%;transform:translateX(-50%);}
 .reg::after{top:50%;left:0;height:1px;width:100%;transform:translateY(-50%);}
 .reg.tl{top:22px;left:22px;}
@@ -128,7 +130,7 @@ body{
   font-weight:500;
   letter-spacing:.17em;
   text-transform:uppercase;
-  color:var(--teal);
+  color:var(--teal-deep);
 }
 .rule{
   display:flex;align-items:center;gap:14px;
@@ -153,19 +155,19 @@ body{
   padding:6px 15px 6px 11px;
   border:1px solid var(--line);
   border-radius:999px;
-  background:rgba(17,176,200,.05);
+  background:rgba(255,255,255,.75);
   font-family:"JetBrains Mono",ui-monospace,monospace;
   font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--paper);
+  color:var(--text);
   margin-bottom:30px;
 }
 .dot{
   width:7px;height:7px;border-radius:50%;background:var(--red);
-  box-shadow:0 0 0 0 rgba(237,27,36,.55);
+  box-shadow:0 0 0 0 rgba(237,27,36,.5);
   animation:pulse 2.6s ease-out infinite;
 }
 @keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(237,27,36,.55);}
+  0%{box-shadow:0 0 0 0 rgba(237,27,36,.5);}
   70%{box-shadow:0 0 0 10px rgba(237,27,36,0);}
   100%{box-shadow:0 0 0 0 rgba(237,27,36,0);}
 }
@@ -176,9 +178,9 @@ h1{
   line-height:1.03;
   letter-spacing:-.04em;
   font-weight:800;
-  color:var(--paper);
+  color:var(--text);
 }
-h1 .lit{display:block;color:var(--teal-lit);}
+h1 .lit{display:block;color:var(--red);}
 
 .lede{
   margin:0 auto 34px;
@@ -186,7 +188,7 @@ h1 .lit{display:block;color:var(--teal-lit);}
   font-size:clamp(16.5px,2.1vw,19px);
   line-height:1.55;
 }
-.lede strong{color:var(--paper);font-weight:700;}
+.lede strong{color:var(--text);font-weight:700;}
 
 /* ---- Form ---- */
 form{display:flex;gap:10px;max-width:470px;margin:0 auto;}
@@ -194,17 +196,18 @@ input[type=email]{
   flex:1;min-width:0;
   padding:14px 16px;
   font:inherit;font-size:15px;
-  color:var(--paper);
-  background:rgba(7,11,15,.7);
-  border:1px solid var(--line);
+  color:var(--text);
+  background:var(--surface);
+  border:1px solid rgba(20,24,28,.16);
   border-radius:10px;
   outline:none;
+  box-shadow:0 1px 2px rgba(20,24,28,.04);
   transition:border-color .18s ease, box-shadow .18s ease;
 }
 input[type=email]::placeholder{color:var(--dim);}
 input[type=email]:focus{
   border-color:var(--teal);
-  box-shadow:0 0 0 3px rgba(17,176,200,.18);
+  box-shadow:0 0 0 3px rgba(17,176,200,.2);
 }
 button,.btn{
   display:inline-block;
@@ -213,11 +216,12 @@ button,.btn{
   color:#fff;background:var(--red);
   border:0;border-radius:10px;cursor:pointer;white-space:nowrap;
   text-decoration:none;
+  box-shadow:0 6px 16px -8px rgba(237,27,36,.55);
   transition:background .18s ease, transform .12s ease;
 }
-button:hover,.btn:hover{background:#FF2630;}
+button:hover,.btn:hover{background:var(--red-deep);}
 button:active,.btn:active{transform:translateY(1px);}
-button:focus-visible,.btn:focus-visible,input:focus-visible{outline:2px solid var(--teal-lit);outline-offset:2px;}
+button:focus-visible,.btn:focus-visible,input:focus-visible{outline:2px solid var(--teal-deep);outline-offset:2px;}
 .fineprint{
   margin:14px 0 0;
   font-family:"JetBrains Mono",ui-monospace,monospace;
@@ -228,7 +232,7 @@ button:focus-visible,.btn:focus-visible,input:focus-visible{outline:2px solid va
 .facts{
   border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);
-  background:rgba(7,11,15,.55);
+  background:rgba(255,255,255,.62);
   padding:0 24px;
 }
 .facts-grid{
@@ -250,9 +254,9 @@ button:focus-visible,.btn:focus-visible,input:focus-visible{outline:2px solid va
   line-height:1.1;
   margin-bottom:6px;
 }
-.fact:nth-child(1) b{color:var(--teal-lit);}
-.fact:nth-child(2) b{color:var(--copper);}
-.fact:nth-child(3) b{color:var(--red-lit);}
+.fact:nth-child(1) b{color:var(--teal-deep);}
+.fact:nth-child(2) b{color:var(--copper-deep);}
+.fact:nth-child(3) b{color:var(--red-deep);}
 .fact span{font-size:13.5px;color:var(--muted);}
 
 /* ---- Sections ---- */
@@ -264,7 +268,7 @@ h2{
   line-height:1.15;
   letter-spacing:-.028em;
   font-weight:800;
-  color:var(--paper);
+  color:var(--text);
 }
 
 /* ---- Cards ---- */
@@ -276,11 +280,15 @@ h2{
 .card{
   border:1px solid var(--line);
   border-radius:12px;
-  background:rgba(238,244,247,.022);
+  background:rgba(255,255,255,.78);
+  box-shadow:0 1px 2px rgba(20,24,28,.03);
   padding:22px 20px;
-  transition:border-color .2s ease, transform .2s ease;
+  transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease;
 }
-.card:hover{transform:translateY(-3px);}
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 30px -20px rgba(20,24,28,.35);
+}
 .card:nth-child(1):hover{border-color:var(--teal);}
 .card:nth-child(2):hover{border-color:var(--copper);}
 .card:nth-child(3):hover{border-color:var(--red);}
@@ -288,23 +296,22 @@ h2{
   display:block;
   font-family:"JetBrains Mono",ui-monospace,monospace;
   font-size:11px;font-weight:700;letter-spacing:.14em;
-  color:var(--dim);
   margin-bottom:12px;
 }
-.card:nth-child(1) .n{color:var(--teal-lit);}
-.card:nth-child(2) .n{color:var(--copper);}
-.card:nth-child(3) .n{color:var(--red-lit);}
+.card:nth-child(1) .n{color:var(--teal-deep);}
+.card:nth-child(2) .n{color:var(--copper-deep);}
+.card:nth-child(3) .n{color:var(--red-deep);}
 .card h3{
   margin:0 0 6px;
   font-size:18px;font-weight:800;letter-spacing:-.015em;
-  color:var(--paper);
+  color:var(--text);
 }
 .card p{margin:0;font-size:15px;line-height:1.5;}
 
 .tease{
   margin:24px 0 0;
   font-size:15.5px;
-  color:var(--paper);
+  color:var(--text);
 }
 
 /* ---- Closing band ---- */
@@ -317,7 +324,7 @@ footer{
   position:relative;z-index:2;
   border-top:1px solid var(--line);
   padding:24px;
-  background:rgba(7,11,15,.75);
+  background:rgba(255,255,255,.7);
 }
 .footrow{
   max-width:var(--max);margin:0 auto;
@@ -328,7 +335,7 @@ footer{
   color:var(--dim);
 }
 .footrow a{color:var(--muted);text-decoration:none;}
-.footrow a:hover{color:var(--teal-lit);}
+.footrow a:hover{color:var(--red-deep);}
 
 /* ---- Responsive ---- */
 @media (max-width:720px){
@@ -478,7 +485,7 @@ footer{
         </div>
       </div>
 
-      <p class="tease">How? Join us to find out!.</p>
+      <p class="tease">How? You will see when we open.</p>
     </div>
   </section>
 
