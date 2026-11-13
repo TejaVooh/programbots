@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ProgramBots | Coding, Electronics and Robotics Classes for Ages 8 to 16</title>
-<meta name="description" content="Coding, electronics and robotics classes for ages 8 to 16, rebuilt so the learning lasts. New classes opening soon.">
+<title>ProgramBots | Coding, Electronics and Robotics for Ages 8 to 16</title>
+<meta name="description" content="Don't just use technology. Build it. Coding, electronics and robotics classes for ages 8 to 16. Opening soon.">
 <meta name="theme-color" content="#070B0F">
 
 <meta property="og:title" content="ProgramBots">
-<meta property="og:description" content="Your child built a robot. Can they build it again next month? New classes opening soon.">
+<meta property="og:description" content="Don't just use it. Build it. Classes for ages 8 to 16, opening soon.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.programbots.com/">
 <meta property="og:image" content="https://www.programbots.com/logo.png">
@@ -132,13 +132,13 @@ body{
 }
 .rule{
   display:flex;align-items:center;gap:14px;
-  margin:0 0 24px;
+  margin:0 0 22px;
 }
 .rule::after{content:"";flex:1;height:1px;background:var(--line);}
 
 /* ---- Hero ---- */
 .hero{
-  padding:74px 24px 70px;
+  padding:78px 24px 72px;
   text-align:center;
 }
 .logo{
@@ -172,20 +172,19 @@ body{
 
 h1{
   margin:0 auto 22px;
-  max-width:19ch;
-  font-size:clamp(34px,6vw,62px);
-  line-height:1.08;
-  letter-spacing:-.035em;
+  font-size:clamp(40px,7.4vw,78px);
+  line-height:1.03;
+  letter-spacing:-.04em;
   font-weight:800;
   color:var(--paper);
 }
-h1 .lit{color:var(--teal-lit);}
+h1 .lit{display:block;color:var(--teal-lit);}
 
 .lede{
   margin:0 auto 34px;
-  max-width:50ch;
+  max-width:44ch;
   font-size:clamp(16.5px,2.1vw,19px);
-  line-height:1.6;
+  line-height:1.55;
 }
 .lede strong{color:var(--paper);font-weight:700;}
 
@@ -234,7 +233,7 @@ button:focus-visible,.btn:focus-visible,input:focus-visible{outline:2px solid va
 }
 .facts-grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(3,1fr);
 }
 .fact{
   padding:26px 16px;
@@ -249,7 +248,6 @@ button:focus-visible,.btn:focus-visible,input:focus-visible{outline:2px solid va
   font-weight:700;
   letter-spacing:-.03em;
   line-height:1.1;
-  color:var(--paper);
   margin-bottom:6px;
 }
 .fact:nth-child(1) b{color:var(--teal-lit);}
@@ -258,13 +256,13 @@ button:focus-visible,.btn:focus-visible,input:focus-visible{outline:2px solid va
 .fact span{font-size:13.5px;color:var(--muted);}
 
 /* ---- Sections ---- */
-section{padding:62px 24px;}
+section{padding:60px 24px;}
 section + section{border-top:1px solid var(--line);}
 h2{
-  margin:0 0 28px;
-  font-size:clamp(23px,3.4vw,32px);
-  line-height:1.2;
-  letter-spacing:-.025em;
+  margin:0 0 26px;
+  font-size:clamp(24px,3.6vw,34px);
+  line-height:1.15;
+  letter-spacing:-.028em;
   font-weight:800;
   color:var(--paper);
 }
@@ -279,31 +277,40 @@ h2{
   border:1px solid var(--line);
   border-radius:12px;
   background:rgba(238,244,247,.022);
-  padding:24px 20px;
+  padding:22px 20px;
   transition:border-color .2s ease, transform .2s ease;
 }
 .card:hover{transform:translateY(-3px);}
 .card:nth-child(1):hover{border-color:var(--teal);}
 .card:nth-child(2):hover{border-color:var(--copper);}
 .card:nth-child(3):hover{border-color:var(--red);}
-.card svg{display:block;margin-bottom:14px;}
+.card .n{
+  display:block;
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:11px;font-weight:700;letter-spacing:.14em;
+  color:var(--dim);
+  margin-bottom:12px;
+}
+.card:nth-child(1) .n{color:var(--teal-lit);}
+.card:nth-child(2) .n{color:var(--copper);}
+.card:nth-child(3) .n{color:var(--red-lit);}
 .card h3{
   margin:0 0 6px;
-  font-size:17px;font-weight:700;letter-spacing:-.012em;
+  font-size:18px;font-weight:800;letter-spacing:-.015em;
   color:var(--paper);
 }
-.card p{margin:0;font-size:15px;line-height:1.55;}
+.card p{margin:0;font-size:15px;line-height:1.5;}
 
 .tease{
-  margin:26px 0 0;
+  margin:24px 0 0;
   font-size:15.5px;
   color:var(--paper);
 }
 
 /* ---- Closing band ---- */
 .closing{text-align:center;}
-.closing h2{margin-bottom:10px;}
-.closing p{margin:0 auto 24px;max-width:44ch;}
+.closing h2{margin-bottom:8px;}
+.closing p{margin:0 auto 22px;}
 
 /* ---- Footer ---- */
 footer{
@@ -325,13 +332,12 @@ footer{
 
 /* ---- Responsive ---- */
 @media (max-width:720px){
-  .hero{padding:52px 20px 54px;}
-  section{padding:46px 20px;}
+  .hero{padding:54px 20px 54px;}
+  section{padding:44px 20px;}
   .cards{grid-template-columns:1fr;gap:10px;}
-  .facts-grid{grid-template-columns:1fr 1fr;}
-  .fact{padding:20px 12px;}
-  .fact:nth-child(3){border-left:0;}
-  .fact:nth-child(n+3){border-top:1px solid var(--line);}
+  .facts-grid{grid-template-columns:1fr;}
+  .fact{padding:18px 12px;border-left:0;border-top:1px solid var(--line);}
+  .fact:first-child{border-top:0;}
   form{flex-direction:column;}
   .footrow{justify-content:center;text-align:center;}
   .reg{display:none;}
@@ -398,107 +404,89 @@ footer{
   <header class="hero" id="notify">
     <img class="logo" src="logo.png" alt="ProgramBots" width="400" height="60">
 
-    <div class="status"><span class="dot"></span>New classes opening soon</div>
+    <div class="status"><span class="dot"></span>Opening soon</div>
 
-    <h1>Your child built a robot. <span class="lit">Can they build it again next month?</span></h1>
+    <h1>Don't just use it. <span class="lit">Build it.</span></h1>
 
     <p class="lede">
-      Most classes end with a finished project. <strong>Ours end with a child who can do it again, alone.</strong> ProgramBots is coming back, rebuilt from the ground up.
+      Kids today can use any technology. Few know how it works. <strong>In an AI world, that is the skill that counts.</strong>
     </p>
 
     <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
       <input type="email" name="email" placeholder="your@email.com" aria-label="Email address" required>
       <button type="submit">Tell me first</button>
     </form>
-    <p class="fineprint">One email when enrolment opens. We never share your address.</p>
+    <p class="fineprint">One email. No spam.</p>
   </header>
 
   <!-- ============ FACTS ============ -->
   <div class="facts">
     <div class="wide facts-grid">
-      <div class="fact"><b>8 to 16</b><span>Age group</span></div>
-      <div class="fact"><b>3</b><span>Subjects</span></div>
+      <div class="fact"><b>8 to 16</b><span>Ages</span></div>
+      <div class="fact"><b>3</b><span>Coding. Electronics. Robotics.</span></div>
       <div class="fact"><b>4</b><span>Levels</span></div>
-      <div class="fact"><b>1</b><span>Goal: skills that stay</span></div>
     </div>
   </div>
+
+  <!-- ============ THE SKILL ============ -->
+  <section>
+    <div class="wide">
+      <div class="rule"><span class="tag">The skill that counts</span></div>
+      <h2>AI answers. Builders think.</h2>
+
+      <div class="cards">
+        <div class="card">
+          <span class="n">01</span>
+          <h3>Understand it</h3>
+          <p>Know how things work. Spot when AI is wrong.</p>
+        </div>
+        <div class="card">
+          <span class="n">02</span>
+          <h3>Solve it</h3>
+          <p>Break big problems into small steps.</p>
+        </div>
+        <div class="card">
+          <span class="n">03</span>
+          <h3>Direct it</h3>
+          <p>Use AI as a tool. Stay in charge.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ============ WHAT IS DIFFERENT ============ -->
   <section>
     <div class="wide">
       <div class="rule"><span class="tag">What is different</span></div>
-      <h2>Built so the learning lasts.</h2>
+      <h2>Built to last.</h2>
 
       <div class="cards">
         <div class="card">
+          <span class="n">01</span>
           <h3>Skills that stay</h3>
-          <p>Your child will still know it months later. Not only on the day of the class.</p>
+          <p>Still there months later.</p>
         </div>
         <div class="card">
+          <span class="n">02</span>
           <h3>Progress you can see</h3>
-          <p>Clear levels. At each one, your child shows what they can build on their own.</p>
+          <p>Clear levels. Proof at each one.</p>
         </div>
         <div class="card">
-          <h3>Real things, built by hand</h3>
-          <p>Real code, real circuits and real robots that move. Nothing pretend.</p>
+          <span class="n">03</span>
+          <h3>Real builds</h3>
+          <p>Real code. Real circuits. Real robots.</p>
         </div>
       </div>
 
-      <p class="tease">How we do it is the part we worked on the longest. You will see it when we open.</p>
-    </div>
-  </section>
-
-  <!-- ============ SUBJECTS ============ -->
-  <section>
-    <div class="wide">
-      <div class="rule"><span class="tag">What your child will learn</span></div>
-      <h2>Three subjects. One connected journey.</h2>
-
-      <div class="cards">
-
-        <div class="card">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3FD8EF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="9 9 5.5 12 9 15"></polyline>
-            <polyline points="15 9 18.5 12 15 15"></polyline>
-            <line x1="13" y1="6.5" x2="11" y2="17.5"></line>
-          </svg>
-          <h3>Coding</h3>
-          <p>From first programs to Python that controls real hardware.</p>
-        </div>
-
-        <div class="card">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8A33D" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="7.5" y="7.5" width="9" height="9" rx="1.5"></rect>
-            <line x1="12" y1="3.5" x2="12" y2="7.5"></line>
-            <line x1="12" y1="16.5" x2="12" y2="20.5"></line>
-            <line x1="3.5" y1="12" x2="7.5" y2="12"></line>
-            <line x1="16.5" y1="12" x2="20.5" y2="12"></line>
-          </svg>
-          <h3>Electronics</h3>
-          <p>Circuits, lights and sensors, wired by the child's own hands.</p>
-        </div>
-
-        <div class="card">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FF4A52" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="4.5" y="9" width="15" height="10.5" rx="2.5"></rect>
-            <line x1="12" y1="5" x2="12" y2="9"></line>
-            <circle cx="12" cy="4" r="1.4"></circle>
-            <circle cx="9.2" cy="14" r="1.3" fill="#FF4A52" stroke="none"></circle>
-            <circle cx="14.8" cy="14" r="1.3" fill="#FF4A52" stroke="none"></circle>
-          </svg>
-          <h3>Robotics</h3>
-          <p>Robots that sense, decide and move without any help.</p>
-        </div>
-
-      </div>
+      <p class="tease">How? You will see when we open.</p>
     </div>
   </section>
 
   <!-- ============ CLOSING ============ -->
   <section class="closing">
     <div class="wide">
-      <h2>Seats will be limited.</h2>
-      <p>People on the list hear first, before enrolment opens to everyone.</p>
+      <h2>Limited seats.</h2>
+      <p>The list hears first.</p>
       <a class="btn" href="#notify">Join the list</a>
     </div>
   </section>
